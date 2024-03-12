@@ -1,6 +1,7 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
+const multer = require('multer');
 // Khai báo template engine
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -9,11 +10,23 @@ app.use(express.static('./src/public'));
 app.use(express.urlencoded({
     extended: true,
 }));
-
+// Khai báo hàm upload ảnh
+const storage = multer.diskStorage({
+    // Khai báo folder lưu trữ ảnh
+    destination: (req, file, cb) => {
+        cb(null, './src/public/images');
+    },
+    // Tên file ảnh
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+let uploadFile = multer({ storage: storage });
+//
 const products = [
-    { id: 1, name: "Sản phẩm 1", price: 100000 },
-    { id: 2, name: "Sản phẩm 2", price: 200000 },
-    { id: 3, name: "Sản phẩm 3", price: 300000 },
+    { id: 1, name: "Sản phẩm 1", price: 100000, image: "anh1.jpg" },
+    { id: 2, name: "Sản phẩm 2", price: 200000, image: "anh1.jpg" },
+    { id: 3, name: "Sản phẩm 3", price: 300000, image: "anh1.jpg" },
 ];
 let classname = "WD18327";
 // Khai báo route
@@ -59,12 +72,15 @@ app.get('/add-product', (req, res) => {
     res.render('add-product');
 });
 // Route Post
-app.post('/add-product', (req, res) => {
-    console.log(req.body);
+app.post('/add-product', uploadFile.single('pro_file'), (req, res) => {
+    // console.log(req.body);
+    let file = req.file;
+    let img = file.filename;
     const new_pro = {
         id: products.length + 1,
         name: req.body.pro_name,
-        price: Number(req.body.pro_price)
+        price: Number(req.body.pro_price),
+        image: img
     }
     products.push(new_pro);
     res.redirect('/list-products');
