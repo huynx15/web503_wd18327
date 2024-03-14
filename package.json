@@ -2,6 +2,7 @@
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.3",
+    "mongoose": "^8.2.1",
     "multer": "^1.4.5-lts.1"
   },
   "name": "wd18327",
@@ -9,9 +10,12 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node ./slide2/server.js"
+    "dev": "nodemon ./slide3/server.js"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
