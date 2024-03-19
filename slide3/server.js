@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 // Trang danh sách sản phẩm
 app.get('/list-products', async (req, res) => {
     products = await Products.find();
-    console.log(products);
+    console.log(Products.find());
     res.render('list-products', { className: classname, products: products });
 })
 // Trang chi tiết sản phẩm

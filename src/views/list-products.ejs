@@ -45,7 +45,9 @@
                         <div class="col-md-4">
                             <img src="images/<%= item.image %>" alt="">
                             <h3>
-                                <%= item.name %>
+                                <a href="/product/<%= item._id %>">
+                                    <%= item.name %>
+                                </a>
                             </h3>
                             <p>
                                 <%= item.price %>
