@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import router from "./routes/products.js";
 import router_id from "./routes/index.js";
+import router_auth from "./routes/auth.js";
 const app = express();
 dotenv.config();
 const port = process.env.PORT;
@@ -22,7 +23,9 @@ app.use(express.json());
 // Trang chủ
 app.use('/', router_id);
 
-app.use('/api', router);
+app.use('/api/product', router);
+
+app.use('/api/auth', router_auth);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
