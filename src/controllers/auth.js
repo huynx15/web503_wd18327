@@ -67,7 +67,7 @@ export const signIn = async (req, res) => {
             });
         }
         // Khởi tạo Token
-        const accessToken = jwt.sign({ _id: user._id }, process.env.SCERET_CODE);
+        const accessToken = jwt.sign({ _id: user._id }, process.env.SECRET_CODE);
         // Thông báo 
         user.password = undefined;
         return res.status(200).json({

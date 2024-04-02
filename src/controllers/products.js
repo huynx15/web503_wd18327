@@ -1,3 +1,4 @@
+import Category from "../models/Category.js";
 import Products from "../models/products.js";
 export const getAllProduct = async (req, res) => {
     try {
@@ -45,6 +46,16 @@ export const addProduct = async (req, res) => {
                 message: "Thêm sản phẩm thất bại",
             });
         } else {
+            const updateCate = await Category.findByIdAndUpdate(product.categoryId, {
+                $addToSet: {
+                    products: product._id,
+                }
+            });
+            if (!updateCate) {
+                return res.status(404).json({
+                    message: "Update danh mục thất bại",
+                });
+            }
             return res.status(200).json({
                 message: "Thêm sản phẩm thành công",
                 data: product

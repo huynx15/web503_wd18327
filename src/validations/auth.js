@@ -20,7 +20,8 @@ export const signUpValidation = joi.object({
     confirmPassword: joi.string().required().valid(joi.ref('password')).messages({
         'string.empty': 'confirmPassword không được để trống',
         'any.only': 'confirmPassword không khớp với password',
-    })
+    }),
+    role: joi.string()
 });
 
 export const signInValidation = joi.object({

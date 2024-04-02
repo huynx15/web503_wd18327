@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import router from "./routes/products.js";
 import router_id from "./routes/index.js";
 import router_auth from "./routes/auth.js";
+import router_cat from "./routes/category.js";
 const app = express();
 dotenv.config();
 const port = process.env.PORT;
@@ -24,6 +25,8 @@ app.use(express.json());
 app.use('/', router_id);
 
 app.use('/api/product', router);
+
+app.use('/api/cat', router_cat);
 
 app.use('/api/auth', router_auth);
 
